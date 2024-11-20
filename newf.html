@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Интерактивный сайт</title>
+    <style>
+      .discounted {
+        color: green;
+      }
+      .high-scorer {
+        font-weight: bold;
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Добро пожаловать на наш сайт</h1>
+
+    <!-- Профили пользователей -->
+    <section>
+      <h2>Профили пользователей</h2>
+      <ul id="userList"></ul>
+    </section>
+
+    <!-- Список товаров -->
+    <section>
+      <h2>Список товаров</h2>
+      <ul id="productList"></ul>
+    </section>
+
+    <!-- Студенты и фильтрация -->
+    <section>
+      <h2>Список студентов (Фильтр по оценкам)</h2>
+      <ul id="studentList"></ul>
+    </section>
+
+    <!-- Товары со скидкой -->
+    <section>
+      <h2>Товары со скидкой</h2>
+      <ul id="discountedProducts"></ul>
+    </section>
+
+    <script>
+      // 1. Профили пользователей с использованием объекта
+      const users = {
+        user1: { name: "Иван", age: 28, email: "ivan@mail.com" },
+        user2: { name: "Анна", age: 24, email: "anna@mail.com" },
+        user3: { name: "Олег", age: 35, email: "oleg@mail.com" },
+      };
+
+      const userList = document.getElementById("userList");
+      for (let key in users) {
+        const user = users[key];
+        const listItem = document.createElement("li");
+        listItem.textContent = `${user.name}, ${user.age} лет, Email: ${user.email}`;
+        userList.appendChild(listItem);
+      }
+
+      // 2. Список товаров с использованием массива
+      const products = [
+        { name: "Телефон", price: 20000 },
+        { name: "Ноутбук", price: 60000 },
+        { name: "Часы", price: 5000 },
+      ];
+
+      const productList = document.getElementById("productList");
+      products.forEach((product) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${product.name} — Цена: ${product.price} руб.`;
+        productList.appendChild(listItem);
+      });
+
+      // 3. Список студентов с фильтрацией по оценкам
+      const students = [
+        { name: "Иван", grade: 90 },
+        { name: "Анна", grade: 75 },
+        { name: "Олег", grade: 85 },
+        { name: "Маша", grade: 60 },
+        { name: "Иван", grade: 100 },
+      ];
+
+      const highScorers = students.filter((student) => student.grade >= 80);
+      const studentList = document.getElementById("studentList");
+      highScorers.forEach((student) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${student.name} — Оценка: ${student.grade}`;
+        listItem.classList.add("high-scorer");
+        studentList.appendChild(listItem);
+      });
+
+      // 4. Товары со скидкой с использованием функции map
+      const discountedProducts = products.map((product) => {
+        return {
+          name: product.name,
+          price: product.price * 0.9, // Применение 10% скидки
+        };
+      });
+
+      const discountedProductList =
+        document.getElementById("discountedProducts");
+      discountedProducts.forEach((product) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${product.name} — Цена со скидкой: ${product.price} руб.`;
+        listItem.classList.add("discounted");
+        discountedProductList.appendChild(listItem);
+      });
+    </script>
+  </body>
+</html>
